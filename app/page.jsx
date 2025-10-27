@@ -4,9 +4,12 @@ import { FiDownload } from "react-icons/fi";
 // components
 import Social from "@/components/Social";
 import Photo from "@/components/Photo";
+import Stats from "@/components/Stats";
+
 const Home = () => {
   return (
-    <div className="h-full">
+    <section className="h-full">
+      {/* Hero section - container */}
       <div className="container mx-auto h-full">
         <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-8 xl:pb-24">
           {/* text */}
@@ -45,7 +48,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </div>
+
+      <Stats />
+    </section>
   );
 };
 
