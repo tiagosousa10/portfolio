@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { BsArrowUpRight, BsGithub } from "react-icons/bs";
+import { BsArrowUpRight, BsGithub, BsLinkedin } from "react-icons/bs";
 
 import WorkSliderButtons from "@/components/WorkSliderButtons";
 import {
@@ -80,7 +80,7 @@ const WorkClient = ({ projects = [] }) => {
       className="min-h-[80vh] flex flex-col justify-center py-12 xl:px-0"
     >
       <div className="container mx-auto">
-        <div className="flex flex-col xl:flex-row xl:gap-[30px]">
+        <div className="flex flex-col xl:flex-row xl:gap-[60px]">
           <div className="w-full xl:w-[50%] xl:h-[460px] flex flex-col xl:justify-between order-2 xl:order-none">
             <div className="flex flex-col gap-[30px] h-[50%]">
               <div className="text-8xl leading-none font-extrabold text-transparent text-outline">
@@ -97,7 +97,7 @@ const WorkClient = ({ projects = [] }) => {
               <p className="text-white/60">{activeProject.description}</p>
 
               {stackItems.length > 0 ? (
-                <ul className="flex gap-4">
+                <ul className="flex flex-wrap gap-4">
                   {stackItems.map((tech, index) => (
                     <li
                       key={`${tech.name}-${index}`}
@@ -115,19 +115,6 @@ const WorkClient = ({ projects = [] }) => {
               <div className="border border-white/20" />
 
               <div className="flex items-center gap-4">
-                <Link href={liveHref} target="_blank" rel="noreferrer">
-                  <TooltipProvider delayDuration={100}>
-                    <Tooltip>
-                      <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
-                        <BsArrowUpRight className="text-white text-3xl group-hover:text-accent" />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Live project</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </Link>
-
                 <Link href={githubHref} target="_blank" rel="noreferrer">
                   <TooltipProvider delayDuration={100}>
                     <Tooltip>
@@ -136,6 +123,18 @@ const WorkClient = ({ projects = [] }) => {
                       </TooltipTrigger>
                       <TooltipContent>
                         <p>GitHub repository</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </Link>
+                <Link href={liveHref} target="_blank" rel="noreferrer">
+                  <TooltipProvider delayDuration={100}>
+                    <Tooltip>
+                      <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
+                        <BsLinkedin className="text-white text-3xl group-hover:text-accent" />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>LinkedIn Video</p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
@@ -153,23 +152,26 @@ const WorkClient = ({ projects = [] }) => {
             >
               {safeProjects.map((item, index) => (
                 <SwiperSlide key={item.github ?? index} className="w-full">
-                  <div className="h-[460px] relative group flex justify-center items-center bg-pink-50/20">
+                  <div className="h-[460px] relative group flex justify-center items-center bg-pink-50/20 overflow-hidden rounded-lg">
                     <div className="absolute top-0 bottom-0 w-full h-full bg-black/10 z-10" />
-                    <div className="relative w-full h-full">
-                      <Image
-                        src={item.image}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover"
-                        alt={item.title}
-                      />
-                    </div>
+                    <Image
+                      src={item.image}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-fill"
+                      alt={item.title}
+                      quality={100}
+                      priority={index === 0}
+                      style={{
+                        imageRendering: "high-quality",
+                      }}
+                    />
                   </div>
                 </SwiperSlide>
               ))}
 
               <WorkSliderButtons
-                containerStyles="flex gap-2 absolute right-0 bottom-0 [calc(50%_-_22px)] xl:bottom-0 z-20 w-full justify-between xl:w-max xl:justify-none"
+                containerStyles="flex  gap-2 absolute right-0 bottom-0 [calc(50%_-_22px)] xl:bottom-0 z-20 w-full justify-between xl:w-max xl:justify-none"
                 btnStyles="bg-accent hover:bg-accent-hover text-primary text-[22px] w-[44px] h-[44px] flex justify-center items-center transition-all"
               />
             </Swiper>
