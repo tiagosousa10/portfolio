@@ -1,182 +1,149 @@
-"use client";
+import WorkClient from "@/components/work/WorkClient";
+import { featuredProjects } from "@/lib/featuredProjects";
 
-import { motion } from "framer-motion";
-import React, { useState } from "react";
+const REVALIDATE_SECONDS = 3600;
+const FALLBACK_IMAGE = "/assets/work/thumb1.png";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+export const revalidate = REVALIDATE_SECONDS;
 
-import { BsArrowUpRight, BsGithub } from "react-icons/bs";
+const capitalize = (value = "") =>
+  value
+    .split(" ")
+    .map((chunk) => chunk.charAt(0).toUpperCase() + chunk.slice(1))
+    .join(" ");
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+const normalizeStack = (stack = []) =>
+  stack.filter(Boolean).map((tech) => {
+    if (typeof tech === "string") {
+      const normalized = tech.replace(/-/g, " ");
+      return { name: capitalize(normalized) };
+    }
 
-import Link from "next/link";
-import Image from "next/image";
-import { SiWeightsandbiases } from "react-icons/si";
-import WorkSliderButtons from "@/components/WorkSliderButtons";
+    return tech;
+  });
 
-const projects = [
-  {
-    num: "01",
-    category: "frontend",
-    title: "project 1",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-    stack: [{ name: "Html 5" }, { name: "Css 3" }, { name: "Javascript" }],
-    image: "/assets/work/thumb1.png",
-    live: "",
-    github: "",
-  },
-  {
-    num: "02",
-    category: "fullstack",
-    title: "project 2",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-    stack: [{ name: "Next.js" }, { name: "Tailwind CSS" }, { name: "Node.js" }],
-    image: "/assets/work/thumb2.png",
-    live: "",
-    github: "",
-  },
-  {
-    num: "03",
-    category: "frontend",
-    title: "project 3",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-    stack: [{ name: "Next.js" }, { name: "Tailwind CSS" }],
-    image: "/assets/work/thumb3.png",
-    live: "",
-    github: "",
-  },
-];
-
-const Work = () => {
-  const [project, setProject] = useState(projects[0]);
-
-  const handleSlideChange = (swiper) => {
-    // get current slide index
-    const currentIndex = swiper.activeIndex;
-    //update project state base on current slide index
-    setProject(projects[currentIndex]);
+const buildGitHubHeaders = () => {
+  const headers = {
+    Accept: "application/vnd.github+json",
+    "User-Agent": "portfolio-site",
   };
 
-  return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      animate={{
-        opacity: 1,
-        transition: { delay: 2.4, duration: 0.4, ease: "easeIn" },
-      }}
-      className="min-h-[80vh] flex flex-col justify-center py-12 xl:px-0"
-    >
-      <div className="container mx-auto">
-        <div className="flex flex-col xl:flex-row xl:gap-[30px]">
-          <div className="w-full xl:w-[50%] xl:h-[460px] flex flex-col xl:justify-between order-2 xl:order-none">
-            <div className="flex flex-col gap-[30px] h-[50%]">
-              {/* outline num */}
-              <div className="text-8xl leading-none font-extrabold text-transparent text-outline">
-                {project.num}
-              </div>
-              {/* project category */}
-              <h2 className="text-[42px] font-bold leading-none text-white group-hover:text-accent transition-all duration-500 capitalize">
-                {project.category} project
-              </h2>
-              {/* project description */}
-              <p className="text-white/60">{project.description}</p>
-              {/* stack */}
-              <ul className="flex gap-4">
-                {project.stack.map((item, index) => {
-                  return (
-                    <li key={index} className="text-xl text-accent">
-                      {item.name}
-                      {/* remove the last comma */}
-                      {index !== project.stack.length - 1 && ","}
-                    </li>
-                  );
-                })}
-              </ul>
-              {/* border */}
-              <div className="border border-white/20"></div>
-              {/* buttons */}
-              <div className="flex items-center gap-4">
-                {/* live project button */}
-                <Link href={project.live}>
-                  <TooltipProvider delayDuration={100}>
-                    <Tooltip>
-                      <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
-                        <BsArrowUpRight className="text-white text-3xl group-hover:text-accent" />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Live project</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </Link>
+  if (process.env.GITHUB_TOKEN) {
+    headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+  }
 
-                {/* github button */}
-                <Link href={project.github}>
-                  <TooltipProvider delayDuration={100}>
-                    <Tooltip>
-                      <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
-                        <BsArrowUpRight className="text-white text-3xl group-hover:text-accent" />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Github repository</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className="w-full xl:w-[50%]">
-            <Swiper
-              spaceBetween={30}
-              slidesPerView={1}
-              className="xl:h-[520px] mb-12"
-              onSlideChange={handleSlideChange}
-            >
-              {projects.map((item, index) => {
-                return (
-                  <SwiperSlide key={index} className="w-full">
-                    <div className="h-[460px] relative group flex justify-center items-center bg-pink-50/20">
-                      {/* overlay */}
-                      <div className="absolute top-0 bottom-0 w-full h-full bg-black/10 z-10"></div>
-                      {/* image */}
-                      <div className="relative w-full h-full">
-                        <Image
-                          src={project.image}
-                          fill
-                          className="object-cover"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                  </SwiperSlide>
-                );
-              })}
-
-              {/* slider buttons */}
-              <WorkSliderButtons
-                containerStyles={
-                  "flex gap-2 absolute right-0 bottom-0 [calc(50%_-_22px)] xl:bottom-0 z-20 w-full justify-between xl:w-max xl:justify-none"
-                }
-                btnStyles={
-                  "bg-accent hover:bg-accent-hover text-primary text-[22px] w-[44px] h-[44px] flex justify-center items-center transition-all"
-                }
-              />
-            </Swiper>
-          </div>
-        </div>
-      </div>
-    </motion.section>
-  );
+  return headers;
 };
 
-export default Work;
+const fetchRepoData = async (owner, repo) => {
+  console.log(`[DEBUG] Fetching GitHub data for: ${owner}/${repo}`);
+  const url = `https://api.github.com/repos/${owner}/${repo}`;
+  console.log(`[DEBUG] Fetch URL: ${url}`);
+
+  const response = await fetch(url, {
+    headers: buildGitHubHeaders(),
+    next: { revalidate: REVALIDATE_SECONDS },
+  });
+
+  console.log(
+    `[DEBUG] Response status: ${response.status} ${response.statusText}`
+  );
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error(`[DEBUG] GitHub API Error:`, errorText);
+    throw new Error(
+      `GitHub request failed for ${owner}/${repo}: ${response.status}`
+    );
+  }
+
+  const data = await response.json();
+  console.log(`[DEBUG] GitHub API Response for ${owner}/${repo}:`, {
+    name: data.name,
+    description: data.description,
+    html_url: data.html_url,
+    homepage: data.homepage,
+    topics: data.topics,
+  });
+
+  return data;
+};
+
+const buildProjectPayload = async (projectConfig, index) => {
+  const { owner, repo } = projectConfig;
+  console.log(`[DEBUG] Building project payload for index ${index}:`, {
+    owner,
+    repo,
+    projectConfig,
+  });
+
+  try {
+    const repoData = await fetchRepoData(owner, repo);
+    const topics = repoData.topics ?? [];
+    const stackSource = projectConfig.stack ?? topics;
+
+    const payload = {
+      num: String(index + 1).padStart(2, "0"),
+      category:
+        projectConfig.category ??
+        (topics.includes("fullstack") ? "fullstack" : "frontend"),
+      title: projectConfig.title ?? repoData.name ?? repo,
+      description:
+        projectConfig.description ??
+        repoData.description ??
+        "Descrição em breve.",
+      stack: normalizeStack(stackSource),
+      image: projectConfig.image ?? FALLBACK_IMAGE,
+      live: projectConfig.live ?? repoData.homepage ?? repoData.html_url ?? "#",
+      github: repoData.html_url ?? `https://github.com/${owner}/${repo}`,
+    };
+
+    console.log(`[DEBUG] Built project payload for ${owner}/${repo}:`, payload);
+    return payload;
+  } catch (error) {
+    console.error(`[DEBUG] Erro ao carregar ${owner}/${repo}:`, error);
+
+    const fallbackPayload = {
+      num: String(index + 1).padStart(2, "0"),
+      category: projectConfig.category ?? "frontend",
+      title: projectConfig.title ?? repo,
+      description:
+        projectConfig.description ??
+        "Não foi possível carregar os detalhes deste projeto no momento.",
+      stack: normalizeStack(projectConfig.stack),
+      image: projectConfig.image ?? FALLBACK_IMAGE,
+      live: projectConfig.live ?? "#",
+      github: `https://github.com/${owner}/${repo}`,
+    };
+
+    console.log(
+      `[DEBUG] Using fallback payload for ${owner}/${repo}:`,
+      fallbackPayload
+    );
+    return fallbackPayload;
+  }
+};
+
+const WorkPage = async () => {
+  console.log(
+    `[DEBUG] WorkPage: Starting fetch for ${featuredProjects.length} projects`
+  );
+  console.log(`[DEBUG] Featured projects config:`, featuredProjects);
+
+  const projects = await Promise.all(
+    featuredProjects.map((projectConfig, index) =>
+      buildProjectPayload(projectConfig, index)
+    )
+  );
+
+  console.log(`[DEBUG] WorkPage: All projects processed:`, projects);
+  console.log(`[DEBUG] WorkPage: Projects count: ${projects.length}`);
+  console.log(
+    `[DEBUG] WorkPage: Projects data:`,
+    JSON.stringify(projects, null, 2)
+  );
+
+  return <WorkClient projects={projects} />;
+};
+
+export default WorkPage;
