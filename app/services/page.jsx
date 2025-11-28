@@ -8,28 +8,28 @@ const services = [
     num: "01",
     title: "Web Development",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+      "Full Stack Developer specialized in MERN & Next.js, React Native mobile development, and Blockchain. I build scalable web and mobile applications and develop Smart Contracts in Solidity.",
     href: "",
   },
   {
     num: "02",
     title: "UI/UX Design",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+      "Figma is a powerful tool for creating beautiful and functional user interfaces. I use Figma to design web and mobile applications, as well as to create logos and other visual assets.",
     href: "",
   },
   {
     num: "03",
-    title: "Logo Design",
+    title: "DevOps",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+      "I have experience with Docker, Kubernetes, and AWS. I can help you deploy your applications and manage your infrastructure.",
     href: "",
   },
   {
     num: "04",
-    title: "SEO",
+    title: "Blockchain & Smart Contracts",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+      "I develop and deploy Smart Contracts in Solidity for the Ethereum blockchain.",
     href: "",
   },
 ];

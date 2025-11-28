@@ -58,7 +58,7 @@ const WorkClient = ({ projects = [] }) => {
     return (
       <section className="min-h-[80vh] flex items-center justify-center">
         <p className="text-white/70">
-          Nenhum projeto selecionado. Atualize a lista em
+          No projects selected. Update the list in
           `lib/featuredProjects.js`.
         </p>
       </section>
@@ -109,7 +109,7 @@ const WorkClient = ({ projects = [] }) => {
                   ))}
                 </ul>
               ) : (
-                <p className="text-white/40">Stack em breve.</p>
+                <p className="text-white/40">Stack coming soon.</p>
               )}
 
               <div className="border border-white/20" />

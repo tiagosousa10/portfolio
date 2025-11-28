@@ -91,7 +91,7 @@ const buildProjectPayload = async (projectConfig, index) => {
       description:
         projectConfig.description ??
         repoData.description ??
-        "Descrição em breve.",
+        "Description coming soon.",
       stack: normalizeStack(stackSource),
       image: projectConfig.image ?? FALLBACK_IMAGE,
       live: projectConfig.live ?? repoData.homepage ?? repoData.html_url ?? "#",
@@ -109,7 +109,7 @@ const buildProjectPayload = async (projectConfig, index) => {
       title: projectConfig.title ?? repo,
       description:
         projectConfig.description ??
-        "Não foi possível carregar os detalhes deste projeto no momento.",
+        "Unable to load project details at this time.",
       stack: normalizeStack(projectConfig.stack),
       image: projectConfig.image ?? FALLBACK_IMAGE,
       live: projectConfig.live ?? "#",

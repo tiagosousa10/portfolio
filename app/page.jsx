@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { FiDownload } from "react-icons/fi";
+import Link from "next/link";
 
 // components
 import Social from "@/components/Social";
@@ -19,19 +20,25 @@ const Home = () => {
               Hello I'm <br /> <span className="text-accent">Tiago Sousa</span>
             </h1>
             <p className="max-w-[500px] mb-9 text-white/80">
-              I excel at crafting elegant digital experiences and I am
-              proficient in various programming languages and technologies.
+              Full Stack Web Developer | JavaScript & TypeScript | Blockchain &
+              Smart Contracts Enthusiast
             </p>
             {/* btn and socials */}
             <div className="flex flex-col xl:flex-row items-center gap-8">
-              <Button
-                variant="outline"
-                size="lg"
-                className="uppercase flex items-center gap-2"
+              <Link
+                href="https://github.com/tiagosousa10/cv"
+                target="_blank"
+                rel="noreferrer"
               >
-                Download CV
-                <FiDownload className="text-xl" />
-              </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="uppercase flex items-center gap-2"
+                >
+                  Download CV
+                  <FiDownload className="text-xl" />
+                </Button>
+              </Link>
               <div className="mb-8 xl:mb-0">
                 <Social
                   containerStyles={"flex gap-6"}
