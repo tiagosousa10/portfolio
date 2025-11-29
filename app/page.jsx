@@ -15,11 +15,11 @@ const Home = () => {
         <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-8 xl:pb-24">
           {/* text */}
           <div className="text-center xl:text-left order-2 xl:order-none">
-            <span className="text-xl">Software Developer</span>
-            <h1 className="h1 mb-6">
+            <span className="text-base sm:text-lg md:text-xl">Software Developer</span>
+            <h1 className="h1 mb-4 sm:mb-6">
               Hello I'm <br /> <span className="text-accent">Tiago Sousa</span>
             </h1>
-            <p className="max-w-[500px] mb-9 text-white/80">
+            <p className="max-w-[500px] mb-6 sm:mb-9 text-sm sm:text-base text-white/80">
               Full Stack Web Developer | JavaScript & TypeScript | Blockchain &
               Smart Contracts Enthusiast
             </p>

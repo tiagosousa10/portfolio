@@ -138,7 +138,7 @@ const Contact = () => {
               onSubmit={handleSubmit}
               className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl"
             >
-              <h3 className="text-4xl text-accent">Let's work together</h3>
+              <h3 className="text-2xl sm:text-3xl md:text-4xl text-accent">Let's work together</h3>
               <p className="text-white/60">
                 Get in touch and let's work together on your next project
               </p>
@@ -238,16 +238,16 @@ const Contact = () => {
 
           {/* info */}
           <div className="flex-1 flex items-center xl:justify-end order-1 xl:order-none mb-8 xl:mb-0">
-            <ul className="flex flex-col gap-10">
+            <ul className="flex flex-col gap-6 sm:gap-8 md:gap-10">
               {info.map((item, index) => {
                 return (
-                  <li key={index} className="flex items-center gap-6">
-                    <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#27272c] text-accent rounded-md flex items-center justify-center">
-                      <div className="text-[28px]">{item.icon}</div>
+                  <li key={index} className="flex items-center gap-4 sm:gap-6">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-[52px] md:h-[52px] xl:w-[72px] xl:h-[72px] bg-[#27272c] text-accent rounded-md flex items-center justify-center">
+                      <div className="text-xl sm:text-2xl md:text-[28px]">{item.icon}</div>
                     </div>
                     <div className="flex-1">
-                      <p className="text-white/60">{item.title}</p>
-                      <h3 className="text-xl">{item.description}</h3>
+                      <p className="text-sm sm:text-base text-white/60">{item.title}</p>
+                      <h3 className="text-base sm:text-lg md:text-xl">{item.description}</h3>
                     </div>
                   </li>
                 );
