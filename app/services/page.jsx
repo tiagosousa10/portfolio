@@ -8,7 +8,7 @@ const services = [
     num: "01",
     title: "Web Development",
     description:
-      "Full Stack Developer specialized in MERN & Next.js, React Native mobile development, and Blockchain. I build scalable web and mobile applications and develop Smart Contracts in Solidity.",
+      "Full Stack Developer focused on Java, JavaScript, and TypeScript. I work with Spring Boot and Node.js on the backend, and with Angular, React, and Next.js on the frontend.",
     href: "",
   },
   {

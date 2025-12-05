@@ -1,14 +1,16 @@
 "use client";
 import {
-  FaHtml5,
-  FaCss3,
   FaJs,
   FaReact,
   FaFigma,
   FaNodeJs,
+  FaJava,
+  FaAngular,
 } from "react-icons/fa";
+import { SiSpringboot } from "react-icons/si";
+import { TbBrandCSharp } from "react-icons/tb";
 
-import { SiTailwindcss, SiNextdotjs } from "react-icons/si";
+import { SiNextdotjs } from "react-icons/si";
 
 //about data
 const about = {
@@ -109,39 +111,41 @@ const education = {
 const skills = {
   title: "My Skills",
   description:
-    "Full Stack Developer specialized in MERN & Next.js, React Native mobile development, and Blockchain. I build scalable web and mobile applications and develop Smart Contracts in Solidity.",
+    "Full Stack Developer focused on Java, JavaScript, and TypeScript. I work with Spring Boot and Node.js on the backend, and with Angular, React, and Next.js on the frontend. I build scalable web and mobile applications and develop Smart Contracts in Solidity.",
   skillList: [
     {
-      icon: <FaHtml5 />,
-      name: "HTML5",
+      icon: <FaAngular />,
+      name: "Angular",
     },
     {
-      icon: <FaCss3 />,
-      name: "CSS3",
+      icon: <FaJava />,
+      name: "Java",
     },
+    {
+      icon: <SiSpringboot />,
+      name: "Spring Boot",
+    },
+
     {
       icon: <FaJs />,
       name: "JavaScript",
     },
     {
+      icon: <FaNodeJs />,
+      name: "Node.js",
+    },
+    {
       icon: <FaReact />,
       name: "React",
     },
-    {
-      icon: <SiTailwindcss />,
-      name: "Tailwind CSS",
-    },
+
     {
       icon: <SiNextdotjs />,
       name: "Next.js",
     },
     {
-      icon: <FaFigma />,
-      name: "Figma",
-    },
-    {
-      icon: <FaNodeJs />,
-      name: "Node.js",
+      icon: <TbBrandCSharp />,
+      name: "C#",
     },
   ],
 };
@@ -184,7 +188,9 @@ const Resume = () => {
             <TabsContent value="skills" className="w-full h-full">
               <div className="flex flex-col gap-[30px]">
                 <div className="flex flex-col gap-[30px] text-center xl:text-left">
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold">{skills.title}</h3>
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+                    {skills.title}
+                  </h3>
                   <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
                     {skills.description}
                   </p>
@@ -216,7 +222,9 @@ const Resume = () => {
             {/* education */}
             <TabsContent value="education" className="w-full">
               <div className="flex flex-col gap-[30px] text-center xl:text-left">
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold">{education.title}</h3>
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+                  {education.title}
+                </h3>
                 <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
                   {education.description}
                 </p>
@@ -248,7 +256,9 @@ const Resume = () => {
             {/* experience */}
             <TabsContent value="experience" className="w-full">
               <div className="flex flex-col gap-[30px] text-center xl:text-left">
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold">{experience.title}</h3>
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+                  {experience.title}
+                </h3>
                 <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
                   {experience.description}
                 </p>
@@ -283,7 +293,9 @@ const Resume = () => {
               className="w-full text-center xl:text-left"
             >
               <div className="flex flex-col gap-[30px]">
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold">{about.title}</h3>
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+                  {about.title}
+                </h3>
                 <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
                   {about.description}
                 </p>
@@ -294,8 +306,12 @@ const Resume = () => {
                         key={index}
                         className="flex items-center justify-start xl:justify-start gap-4 flex-nowrap"
                       >
-                        <span className="text-white/60 whitespace-nowrap">{item.fieldName}</span>
-                        <span className="text-xl whitespace-nowrap">{item.fieldValue}</span>
+                        <span className="text-white/60 whitespace-nowrap">
+                          {item.fieldName}
+                        </span>
+                        <span className="text-xl whitespace-nowrap">
+                          {item.fieldValue}
+                        </span>
                       </li>
                     );
                   })}
