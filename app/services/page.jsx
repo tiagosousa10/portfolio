@@ -6,7 +6,7 @@ import Link from "next/link";
 const services = [
   {
     num: "01",
-    title: "Web Development",
+    title: "Development",
     description:
       "Full Stack Developer focused on Java, JavaScript, and TypeScript. I work with Spring Boot and Node.js on the backend, and with Angular, React, and Next.js on the frontend.",
     href: "",
